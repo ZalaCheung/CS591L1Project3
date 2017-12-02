@@ -24,13 +24,13 @@ def requestResponse(request):
     repo = client.repo
     repo.authenticate('htw93_tscheung_wenjun', 'htw93_tscheung_wenjun')
     BostonHotelCustomScore = repo.htw93_tscheung_wenjun.BostonHotelCustomScore
-    BostonHotel = repo.htw93_tscheung_wenjun.BostonHotel
-    hotel = BostonHotel.find()
+    BostonHotelPP = repo.htw93_tscheung_wenjun.BostonHotelPotentialPermutation
+    hotel = BostonHotelPP.find()
     flag = False
+    hahahahah = []
     for h in hotel:
-        if h['Hotel_name'] =='Boston Harbor Hotel':
-            flag = True
-    return JsonResponse({'a':flag})
+        hahahahah.append({'id':h['id'],'lat':h['lat'],'long':h['long']})
+    return JsonResponse({'a':hahahahah})
 
 
 
