@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 import dml
+import json
 
 # Create your views here.
 # @csrf_exempt
@@ -20,18 +21,25 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def requestResponse(request):
+    print("receive request")
+    json_str = ((request.body).decode('utf-8'))
+    body = json.loads(json_str)
+    s = ''
+    for rank in body['data']:
+        s+=rank
     client = dml.pymongo.MongoClient()
     repo = client.repo
     repo.authenticate('htw93_tscheung_wenjun', 'htw93_tscheung_wenjun')
-    BostonHotelCustomScore = repo.htw93_tscheung_wenjun.BostonHotelCustomScore
     BostonHotelPP = repo.htw93_tscheung_wenjun.BostonHotelPotentialPermutation
-    hotel = BostonHotelPP.find()
-    flag = False
+    hotel = BostonHotelPP.find({'id':s})
     hahahahah = []
+    print(hahahahah)
     for h in hotel:
-        hahahahah.append({'id':h['id'],'lat':h['lat'],'long':h['long']})
-    return JsonResponse({'a':hahahahah})
-
+        # print("hotel:" +h)
+        hahahahah.append({'cluster':h['cluster']})
+    print(hahahahah[0])
+    return JsonResponse(hahahahah[0])
+    # return JsonResponse({'id':hotel['id'],'lat':hotel['lat'],'long':hotel['long'],'cluster':hotel['cluster']})
 
 
 
