@@ -33,12 +33,14 @@ def requestResponse(request):
     BostonHotelPP = repo.htw93_tscheung_wenjun.BostonHotelPotentialPermutation
     hotel = BostonHotelPP.find({'id':s})
     hahahahah = []
-    print(hahahahah)
+    # hahahahah.append(hotel[0]['cluster'])
     for h in hotel:
         # print("hotel:" +h)
         hahahahah.append({'cluster':h['cluster']})
-    print(hahahahah[0])
-    return JsonResponse(hahahahah[0])
+    # print(type(hahahahah[0]))
+    sorted_cluster = sorted(hahahahah[0]['cluster'],key=lambda k: k['score'],reverse=True)
+    print(sorted_cluster)
+    return JsonResponse({'cluster':sorted_cluster})
     # return JsonResponse({'id':hotel['id'],'lat':hotel['lat'],'long':hotel['long'],'cluster':hotel['cluster']})
 
 

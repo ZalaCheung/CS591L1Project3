@@ -136,7 +136,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # this disables Cross domain requests
-CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_ALLOW_ALL = True
 
 # this allows cookie being passed cross domain
 CORS_ALLOW_CREDENTIALS = True
